@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Sylhet City Organization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            overflow: hidden; /* স্ক্রলিং বন্ধ করতে */
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* ৩ টি কলাম */
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .icon-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column; /* Column layout for icon and text */
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-card img {
+            width: 40px; /* Adjusted icon size */
+            height: 40px;
+            margin-bottom: 5px; /* Space between icon and text */
+        }
+        .icon-card p {
+            margin-top: 0;
+            font-size: 14px;
+            color: #333;
+        }
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            background-color: #4CAF50;
+            padding: 10px 0;
+        }
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Sylhet City Organization</h1>
+    </div>
+    <div class="container">
+        <h2>Welcome to Sylhet City Organization</h2>
+        <p>Explore our city services and facilities.</p>
+        <div class="icon-grid">
+            <div class="icon-card">
+                <img src="doctor.png" alt="Doctor">
+                <p>ডাক্তার</p>
+            </div>
+            <div class="icon-card">
+                <img src="hospital.png" alt="Hospital">
+                <p>হাসপাতাল</p>
+            </div>
+            <div class="icon-card">
+                <img src="bus.png" alt="Bus Schedule">
+                <p>বাসের সময়সূচি</p>
+            </div>
+            <div class="icon-card">
+                <img src="train.png" alt="Train Schedule">
+                <p>ট্রেনের সময়সূচি</p>
+            </div>
+            <div class="icon-card">
+                <img src="tourist.png" alt="Tourist Spots">
+                <p>দর্শনীয় স্থান</p>
+            </div>
+            <div class="icon-card">
+                <img src="house.png" alt="House Rent">
+                <p>বাসা ভাড়া</p>
+            </div>
+            <div class="icon-card">
+                <img src="shopping.png" alt="Shopping">
+                <p>শপিং</p>
+            </div>
+            <div class="icon-card">
+                <img src="fire.png" alt="Fire Service">
+                <p>ফায়ার সার্ভিস</p>
+            </div>
+        </div>
+    </div>
+    <div class="nav-bar">
+        <a href="#">Home</a>
+        <a href="#">Contact</a>
+        <a href="#">Notification</a>
+        <a href="#">Profile</a>
+    </div>
+
+    <script>
+        // JavaScript for dynamic functionality if needed
+    </script>
+</body>
+</html>
