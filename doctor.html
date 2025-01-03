@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- user-scalable=no যোগ করা হয়েছে -->
+    <title>Medical Specialties</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            overflow: hidden; /* স্ক্রলিং বন্ধ করতে */
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* এক লাইনে ৩টি বাটন */
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .button {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px; /* বাটনের সাইজ ছোট করা হয়েছে */
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .button:hover {
+            transform: scale(1.05);
+        }
+        .button img {
+            width: 30px; /* ইমেজের সাইজ ছোট করা হয়েছে */
+            height: 30px;
+        }
+        .button p {
+            margin-top: 5px;
+            font-size: 12px; /* টেক্সটের সাইজ ছোট করা হয়েছে */
+            color: #333;
+        }
+        h1 {
+            background-color: #4CAF50; /* সবুজ ব্যাকগ্রাউন্ড */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+            font-size: 18px; /* শিরোনামের আকার ছোট করা হয়েছে */
+        }
+    </style>
+</head>
+<body>
+    <h1>এক নজরে দেখে নিন কোন রোগ হলে কোন ডাক্তার দেখাবেন</h1>
+    <div class="container">
+        <div class="button">
+            <img src="mental_health_icon.png" alt="Mental Health">
+            <p>মনোরোগ বিশেষজ্ঞ</p>
+        </div>
+        <div class="button">
+            <img src="heart_icon.png" alt="Heart">
+            <p>হৃদরোগ বিশেষজ্ঞ</p>
+        </div>
+        <div class="button">
+            <img src="spine_icon.png" alt="Spine">
+            <p>পাইপল বিশেষজ্ঞ</p>
+        </div>
+        <div class="button">
+            <img src="dentist_icon.png" alt="Dentist">
+            <p>ডেন্টিস্ট</p>
+        </div>
+        <div class="button">
+            <img src="eye_icon.png" alt="Eye">
+            <p>চক্ষু বিশেষজ্ঞ</p>
+        </div>
+        <div class="button">
+            <img src="skin_icon.png" alt="Skin">
+            <p>চর্ম বিশেষজ্ঞ</p>
+        </div>
+        <div class="button">
+            <img src="ent_icon.png" alt="ENT">
+            <p>ইএনটি বিশেষজ্ঞ</p>
+        </div>
+        <div class="button">
+            <img src="neurology_icon.png" alt="Neurology">
+            <p>নিউরোলজি বিশেষজ্ঞ</p>
+        </div>
+        <div class="button">
+            <img src="orthopedic_icon.png" alt="Orthopedic">
+            <p>অর্থোপেডিক বিশেষজ্ঞ</p>
+        </div>
+        <div class="button">
+            <img src="pediatric_icon.png" alt="Pediatric">
+            <p>পেডিয়াট্রিক বিশেষজ্ঞ</p>
+        </div>
+        <div class="button">
+            <img src="surgery_icon.png" alt="Surgery">
+            <p>সার্জারি বিশেষজ্ঞ</p>
+        </div>
+        <div class="button">
+            <img src="urology_icon.png" alt="Urology">
+            <p>ইউরোলজি বিশেষজ্ঞ</p>
+        </div>
+    </div>
+</body>
+</html>
