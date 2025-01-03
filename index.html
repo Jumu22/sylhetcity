@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sylhet City Organization - Login</title>
     <style>
         body {
@@ -16,6 +16,10 @@
             overflow: hidden; /* স্ক্রলিং বন্ধ করতে */
             text-align: center;
             position: relative; /* পজিশন রিলেটিভ করতে হবে */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Standard */
         }
 
         body::before {
@@ -33,23 +37,32 @@
         }
 
         .login-container {
-            background-color: rgba(255, 255, 255, 0.6); /* Transparent background */
+            background-color: rgba(255, 255, 255, 0.8); /* Transparent background */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 90%;
+            max-width: 300px;
         }
 
         h1 {
             margin-bottom: 20px;
         }
 
-        input[type="text"], input[type="password"] {
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .input-group input[type="text"], .input-group input[type="password"] {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
+            margin-top: 10px;
+            -webkit-user-select: auto; /* Allow selecting in input fields */
+            -moz-user-select: auto; 
+            -ms-user-select: auto; 
+            user-select: auto;
         }
 
         button {
@@ -61,6 +74,7 @@
             cursor: pointer;
             width: 100%;
             font-size: 16px;
+            margin-top: 20px; /* বাটনটি নিচে সরানোর জন্য মার্জিন */
         }
 
         button:hover {
@@ -77,8 +91,12 @@
     <div class="login-container">
         <h1>Sylhet City Organization</h1>
         <p>আপনার একাউন্টে প্রবেশ করুন</p>
-        <input type="text" placeholder="নাম্বার লিখুন" id="username">
-        <input type="password" placeholder="পাসওয়ার্ড লিখুন" id="password">
+        <div class="input-group">
+            <input type="text" placeholder="নাম্বার লিখুন" id="username">
+        </div>
+        <div class="input-group">
+            <input type="password" placeholder="পাসওয়ার্ড লিখুন" id="password">
+        </div>
         <a href="#" class="link">পাসওয়ার্ড ভুলে গেছেন?</a>
         <button onclick="login()">প্রবেশ করুন</button>
         <p>একাউন্ট করা নাই? <a href="#" class="link">রেজিস্ট্রেশন করুন</a></p>
@@ -89,10 +107,18 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // এখানে আপনার লগইন যাচাইকরণ কোড যুক্ত করুন
+            // সঠিক ইউজারনেম এবং পাসওয়ার্ড
+            const correctUsername = "admin";
+            const correctPassword = "admin";
 
-            // যদি লগইন সফল হয় তাহলে হোম পেইজে রিডিরেক্ট করুন
-            window.location.href = 'home.html';
+            // যাচাইকরণ
+            if(username === correctUsername && password === correctPassword) {
+                // লগইন সফল হলে হোম পেইজে রিডিরেক্ট করুন
+                window.location.href = 'home.html';
+            } else {
+                // ভুল ইউজারনেম বা পাসওয়ার্ড হলে সতর্কবার্তা দেখান
+                alert("ভুল নাম্বার বা পাসওয়ার্ড, আবার চেষ্টা করুন।");
+            }
         }
     </script>
 </body>
