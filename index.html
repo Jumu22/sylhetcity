@@ -51,10 +51,13 @@
 
         .input-group {
             margin-bottom: 10px;
+            display: flex;
+            justify-content: center; /* Center align horizontally */
         }
 
         .input-group input[type="text"], .input-group input[type="password"] {
             width: 100%;
+            max-width: 250px; /* Fix max-width */
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -74,7 +77,7 @@
             cursor: pointer;
             width: 100%;
             font-size: 16px;
-            margin-top: 20px; /* বাটনটি নিচে সরানোর জন্য মার্জিন */
+            margin-top: 20px; /* Button margin */
         }
 
         button:hover {
