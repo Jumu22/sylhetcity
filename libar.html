@@ -27,28 +27,27 @@
             position: relative; /* For positioning child elements */
         }
 
-        .container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('your-image.jpg'); /* Background image */
-            background-size: cover;
-            background-position: center;
-            opacity: 0.5; /* Adjust opacity here */
-            z-index: -1; /* Place it below the content */
+        #searchInput {
+            width: 80%; /* Increase the width of the input box */
+            max-width: 500px; /* Maximum width */
+            padding: 10px; /* Add padding for better appearance */
+            font-size: 18px; /* Increase font size */
+            border: 2px solid #007bff; /* Add border */
+            border-radius: 5px; /* Add border radius */
         }
 
         .info-box {
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9); /* Transparent background for info-box */
+            background: rgba(255, 255, 255, 0.9); /* Background color with opacity */
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
             width: 90%; /* প্রস্থ নির্ধারণ */
             max-width: 500px; /* সর্বোচ্চ প্রস্থ নির্ধারণ */
             position: relative; /* For stacking context */
+            background-image: url('container1.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay; /* Blend mode for opacity */
         }
 
         .info-box p {
@@ -75,54 +74,97 @@
         .back-btn:hover {
             background-color: #0056b3; /* হোভার অবস্থানে গাঢ় নীল */
         }
+
+        .no-results {
+            display: none; /* প্রাথমিকভাবে লুকানো */
+            font-size: 18px;
+            color: red;
+            font-weight: bold;
+        }
     </style>
+    <script>
+        function searchDoctor() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var infoBoxes = document.getElementsByClassName('info-box');
+            var noResults = document.getElementById('noResults');
+            var found = false;
+
+            for (var i = 0; i < infoBoxes.length; i++) {
+                var location = infoBoxes[i].dataset.location.toLowerCase();
+                if (location.includes(input)) {
+                    infoBoxes[i].style.display = 'block';
+                    found = true;
+                } else {
+                    infoBoxes[i].style.display = 'none';
+                }
+            }
+
+            // If search input is empty, show all divs
+            if (!input) {
+                for (var i = 0; i < infoBoxes.length; i++) {
+                    infoBoxes[i].style.display = 'block';
+                }
+                found = true;
+            }
+
+            // Show "no results" message if no matches found
+            if (found) {
+                noResults.style.display = 'none';
+            } else {
+                noResults.style.display = 'block';
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
+        <input type="text" id="searchInput" onkeyup="searchDoctor()" placeholder="লোকেশন অনুসারে সার্চ করুন...">
+        <p id="noResults" class="no-results">কোনো ফলাফল খুঁজে পাওয়া যায়নি</p>
+        
         <!-- প্রথম ব্লক -->
-        <div class="info-box">
+        <div class="info-box" data-location="মৌলভীবাজার">
             <p>edited</p>
             <p>edited</p>
             <p>edited</p>
             <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- দ্বিতীয় ব্লক -->
-        <div class="info-box">
+        <div class="info-box" data-location="মৌলভীবাজার">
             <p>edited</p>
             <p>edited</p>
             <p>edited</p>
             <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- তৃতীয় ব্লক -->
-        <div class="info-box">
+        <div class="info-box" data-location="মৌলভীবাজার">
             <p>edited</p>
             <p>edited</p>
             <p>edited</p>
             <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- চতুর্থ ব্লক -->
-        <div class="info-box">
+        <div class="info-box" data-location="মৌলভীবাজার">
             <p>edited</p>
             <p>edited</p>
             <p>edited</p>
             <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- পঞ্চম ব্লক -->
-        <div class="info-box">
+        <div class="info-box" data-location="মৌলভীবাজার">
             <p>edited</p>
             <p>edited</p>
             <p>edited</p>
             <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- ষষ্ঠ ব্লক -->
-        <div class="info-box">
+        <div class="info-box" data-location="মৌলভীবাজার">
             <p>edited</p>
             <p>edited</p>
             <p>edited</p>
             <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- সপ্তম ব্লক -->
-        <div class="info-box">
+        <div class="info-box" data-location="মৌলভীবাজার">
             <p>edited</p>
             <p>edited</p>
             <p>edited</p>
