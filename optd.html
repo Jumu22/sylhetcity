@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>অর্থোপেডিক বিশেষজ্ঞ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            -webkit-user-select: none; /* Prevent selecting text in Safari */
+            -moz-user-select: none; /* Prevent selecting text in Firefox */
+            -ms-user-select: none; /* Prevent selecting text in IE */
+            user-select: none; /* Prevent selecting text in standard browsers */
+            overflow: auto; /* Enable scrolling */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* ব্লকের মাঝে ফাঁকা */
+            padding: 20px;
+            position: relative; /* For positioning child elements */
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('your-image.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5; /* Adjust opacity here */
+            z-index: -1; /* Place it below the content */
+        }
+
+        .info-box {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Transparent background for info-box */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
+            width: 90%; /* প্রস্থ নির্ধারণ */
+            max-width: 500px; /* সর্বোচ্চ প্রস্থ নির্ধারণ */
+            position: relative; /* For stacking context */
+        }
+
+        .info-box p {
+            font-weight: bold; /* Make text bold */
+        }
+
+        .call-number {
+            color: #007bff; /* নীল টেক্সট */
+            text-decoration: underline; /* টেক্সটের নিচে রেখা */
+            cursor: pointer; /* ক্লিকযোগ্য */
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            background-color: #007bff; /* নীল ব্যাকগ্রাউন্ড */
+            color: white; /* সাদা টেক্সট */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3; /* হোভার অবস্থানে গাঢ় নীল */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- প্রথম ব্লক -->
+        <div class="info-box">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+        </div>
+        <!-- দ্বিতীয় ব্লক -->
+        <div class="info-box">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+        </div>
+        <!-- তৃতীয় ব্লক -->
+        <div class="info-box">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+        </div>
+        <!-- চতুর্থ ব্লক -->
+        <div class="info-box">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+        </div>
+        <!-- পঞ্চম ব্লক -->
+        <div class="info-box">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+        </div>
+        <!-- ষষ্ঠ ব্লক -->
+        <div class="info-box">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+        </div>
+        <!-- সপ্তম ব্লক -->
+        <div class="info-box">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+        </div>
+    </div>
+</body>
+</html>
