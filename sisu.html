@@ -24,15 +24,30 @@
             align-items: center;
             gap: 20px; /* ব্লকের মাঝে ফাঁকা */
             padding: 20px;
+            position: relative; /* For positioning child elements */
+        }
+
+        #searchInput {
+            width: 80%; /* Increase the width of the input box */
+            max-width: 500px; /* Maximum width */
+            padding: 10px; /* Add padding for better appearance */
+            font-size: 18px; /* Increase font size */
+            border: 2px solid #007bff; /* Add border */
+            border-radius: 5px; /* Add border radius */
         }
 
         .info-box {
             padding: 20px;
-            background-color: #ffffff; /* সাদা ব্যাকগ্রাউন্ড */
+            background: rgba(255, 255, 255, 0.9); /* Background color with opacity */
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
             width: 90%; /* প্রস্থ নির্ধারণ */
             max-width: 500px; /* সর্বোচ্চ প্রস্থ নির্ধারণ */
+            position: relative; /* For stacking context */
+            background-image: url('container1.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay; /* Blend mode for opacity */
         }
 
         .info-box p {
@@ -59,58 +74,101 @@
         .back-btn:hover {
             background-color: #0056b3; /* হোভার অবস্থানে গাঢ় নীল */
         }
+
+        .no-results {
+            display: none; /* প্রাথমিকভাবে লুকানো */
+            font-size: 18px;
+            color: red;
+            font-weight: bold;
+        }
     </style>
+    <script>
+        function searchDoctor() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var infoBoxes = document.getElementsByClassName('info-box');
+            var noResults = document.getElementById('noResults');
+            var found = false;
+
+            for (var i = 0; i < infoBoxes.length; i++) {
+                var location = infoBoxes[i].dataset.location.toLowerCase();
+                if (location.includes(input)) {
+                    infoBoxes[i].style.display = 'block';
+                    found = true;
+                } else {
+                    infoBoxes[i].style.display = 'none';
+                }
+            }
+
+            // If search input is empty, show all divs
+            if (!input) {
+                for (var i = 0; i < infoBoxes.length; i++) {
+                    infoBoxes[i].style.display = 'block';
+                }
+                found = true;
+            }
+
+            // Show "no results" message if no matches found
+            if (found) {
+                noResults.style.display = 'none';
+            } else {
+                noResults.style.display = 'block';
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
+        <input type="text" id="searchInput" onkeyup="searchDoctor()" placeholder="লোকেশন অনুসারে সার্চ করুন...">
+        <p id="noResults" class="no-results">কোনো ফলাফল খুঁজে পাওয়া যায়নি</p>
+        
         <!-- প্রথম ব্লক -->
-        <div class="info-box">
-            <p>নাম: ডাঃ আব্দুল্লাহ-আল-বাকী</p>
-            <p>যোগ্যতা: এমবিবিএস, এম,ডি (শিশু) কনসালটেন্ট ২৫০ শয্যা বিশিষ্ট হাসপাতাল, মৌলভীবাজার</p>
-            <p>রোগীয় দেখার স্থান: দি পালস কম্পিউটারাইজড ডায়াগনস্টিক সেন্টার শ্রীমঙ্গল রোড, মৌলভীবাজার প্রতিদিন বিকাল ৪টা-রাত ৮টা পর্যন্ত</p>
-            <p>সিরিয়ালের জন্য: <a href="tel:01716127800" class="call-number">01716127800</a></p>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- দ্বিতীয় ব্লক -->
-        <div class="info-box">
-            <p>নাম: ডাঃ বিশ্বজিৎ দেব</p>
-            <p>যোগ্যতা: এমবিবিএস, ডিসিএইচ নবজাতক, শিশু ও কিশোর রোগ বিশেষজ্ঞ কনসালটেন্ট ( শিশু ) ২৫০ শয্যা বিশিষ্ট হাসপাতাল, মৌলভীবাজার</p>
-            <p>রোগীয় দেখার স্থান: দি পালস কম্পিউটারাইজড ডায়াগনস্টিক সেন্টার ইউনিক ফার্মা, শ্রীমঙ্গল রোড, মৌলভীবাজার প্রতিদিন বিকাল ৪টা হতে রাত ৮টা পর্যন্ত</p>
-            <p>সিরিয়ালের জন্য: <a href="tel:01719333103" class="call-number">01719333103</a>, <a href="tel:01717497248" class="call-number">01717497248</a></p>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- তৃতীয় ব্লক -->
-        <div class="info-box">
-            <p>নাম: ডাঃ মোঃ মাহফুজ আহমেদ</p>
-            <p>যোগ্যতা: এমবিবিএস, সিসিডি (বারডেম) ডিসিএইচ (শিশু স্বাস্থ্য) বঙ্গবন্ধু শেখ মুজিব মেডিকেল বিশ্ববিদ্যালয় (পিজি হাসপাতাল), ঢাকা। বিএমডিসি রেজিঃ নং- এ-68910</p>
-            <p>রোগীয় দেখার স্থান: মডার্ণ ডায়াগনষ্টিক এন্ড কনসালটেশন সেন্টার প্রতিদিন বিকাল ৪টা থেকে রাত ৮টা পর্যন্ত।</p>
-            <p>সিরিয়ালের জন্য: <a href="tel:01677958339" class="call-number">01677958339</a></p>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- চতুর্থ ব্লক -->
-        <div class="info-box">
-            <p>নাম: ডাঃ সৈয়দ শাহরিয়ার মাহমুদ</p>
-            <p>যোগ্যতা: এমবিবিএস, বিসিএস (স্বাস্থ্য), এফসিপিএস (এফ পার্ট শিশু), উপজেলা স্বাস্থ্য ও পরিবার পরিকল্পনা কর্মকর্তা, রাজনগর, মৌলভীবাজার।</p>
-            <p>রোগীয় দেখার স্থান: দি গ্রীণ লাইফ (প্রাঃ) হাসপাতাল ডায়াগনস্টিক এন্ড কনসালটেশন সেন্টার</p>
-            <p>সিরিয়ালের জন্য: <a href="tel:01731-766876" class="call-number">01731-766876</a>, <a href="tel:01731-621421" class="call-number">01731-621421</a></p>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- পঞ্চম ব্লক -->
-        <div class="info-box">
-            <p>নাম: ডাঃ বর্ণালী দাশ</p>
-            <p>যোগ্যতা: এমবিবিএস, বিসিএস (স্বাস্থ্য), সি-আল্ট্রাসনোগ্রাফি (এসইউবি), উপজেলা স্বাস্থ্য ও পরিবার পরিকল্পনা কর্মকর্তা, সদর, মৌলভীবাজার। বিএমডিসি রেজিঃ নং- এ-৩৮৭৭৯</p>
-            <p>রোগীয় দেখার স্থান: মেডিকম ডায়াগনষ্টিক সেন্টার রোগী দেখার সময়ঃ প্রতি রবিবার থেকে বৃহস্পতিবার ৫টা থেকে সন্ধ্যা ৭টা পর্যন্ত। শুক্রবার সকাল ১১টা থেকে দুপুর ২টা পর্যন্ত।</p>
-            <p>সিরিয়ালের জন্য: <a href="tel:01306-909305" class="call-number">01306-909305</a></p>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- ষষ্ঠ ব্লক -->
-        <div class="info-box">
-            <p>নাম: ডাঃ মোঃ তৌহিদুল ইসলাম</p>
-            <p>যোগ্যতা: এমবিবিএস, বিসিএস (স্বাস্থ্য) এফসিপিএস (সার্জারি, এমএস (শিশু সার্জারি) সহযোগী অধ্যাপক ও বিভাগীয় প্রধান, শিশু সার্জারি বিভাগ সিলেট এম, এ, জি ওসমানী মেডিকেল কলেজ ও হাসপাতাল।</p>
-            <p>রোগীয় দেখার স্থান: রয়েল মাল্টিকেয়ার ডায়াগনষ্টিক এন্ড কনসালটেশন সেন্টার শ্রীমঙ্গল রোড, বেরীরপার, মৌলভীবাজার। প্রতি বৃহস্পতিবার বিকাল ৪টা থেকে রাত ৯টা।</p>
-            <p>সিরিয়ালের জন্য: <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
         <!-- সপ্তম ব্লক -->
-        <div class="info-box">
-            <p>নাম: ডাঃ ইফতেকার আহমেদ মোহন</p>
-            <p>যোগ্যতা: এমবিবিএস, সিএমইউ জালালাবাদ রাগীব রাবেয়া মেডিকেল কলেজ হাসপাতাল সিলেট।</p>
-            <p>রোগীয় দেখার স্থান: মডার্ণ  ডায়াগনস্টিক এন্ড কনসালটেশন সেন্টার শ্রীমঙ্গল রোড, বেরীরপাড়, মৌলভীবাজার প্রতিদিন সকাল ১০টা-দুপুর ২টা বিকাল ৪টা রাত ৮টা</p>
-            <p>সিরিয়ালের জন্য: <a href="tel:01741855980" class="call-number">01741855980</a>, <a href="tel:01321230520" class="call-number">01321230520</a></p>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
         </div>
     </div>
 </body>
