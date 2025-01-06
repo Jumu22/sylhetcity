@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>দর্শনীয় স্থান</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+            -webkit-user-select: none; /* Prevent selecting text in Safari */
+            -moz-user-select: none; /* Prevent selecting text in Firefox */
+            -ms-user-select: none; /* Prevent selecting text in IE */
+            user-select: none; /* Prevent selecting text in standard browsers */
+            overflow: auto; /* Enable scrolling */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* ব্লকের মাঝে ফাঁকা */
+            padding: 20px;
+            position: relative; /* For positioning child elements */
+        }
+
+        #searchInput {
+            width: 80%; /* Increase the width of the input box */
+            max-width: 500px; /* Maximum width */
+            padding: 10px; /* Add padding for better appearance */
+            font-size: 18px; /* Increase font size */
+            border: 2px solid #007bff; /* Add border */
+            border-radius: 5px; /* Add border radius */
+        }
+
+        .info-box {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Background color with opacity */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
+            width: 90%; /* প্রস্থ নির্ধারণ */
+            max-width: 500px; /* সর্বোচ্চ প্রস্থ নির্ধারণ */
+            position: relative; /* For stacking context */
+            background-image: url('touristplace.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay; /* Blend mode for opacity */
+        }
+
+        .info-box p {
+            font-weight: bold; /* Make text bold */
+        }
+
+        .call-number {
+            color: #007bff; /* নীল টেক্সট */
+            text-decoration: underline; /* টেক্সটের নিচে রেখা */
+            cursor: pointer; /* ক্লিকযোগ্য */
+        }
+
+        .location-link {
+            color: #007bff; /* নীল টেক্সট */
+            text-decoration: underline; /* টেক্সটের নিচে রেখা */
+            cursor: pointer; /* ক্লিকযোগ্য */
+            display: block;
+            margin-top: 10px;
+        }
+
+        .back-btn {
+            margin-top: 20px;
+            background-color: #007bff; /* নীল ব্যাকগ্রাউন্ড */
+            color: white; /* সাদা টেক্সট */
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3; /* হোভার অবস্থানে গাঢ় নীল */
+        }
+
+        .no-results {
+            display: none; /* প্রাথমিকভাবে লুকানো */
+            font-size: 18px;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function searchDoctor() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var infoBoxes = document.getElementsByClassName('info-box');
+            var noResults = document.getElementById('noResults');
+            var found = false;
+
+            for (var i = 0; i < infoBoxes.length; i++) {
+                var location = infoBoxes[i].dataset.location.toLowerCase();
+                if (location.includes(input)) {
+                    infoBoxes[i].style.display = 'block';
+                    found = true;
+                } else {
+                    infoBoxes[i].style.display = 'none';
+                }
+            }
+
+            // If search input is empty, show all divs
+            if (!input) {
+                for (var i = 0; i < infoBoxes.length; i++) {
+                    infoBoxes[i].style.display = 'block';
+                }
+                found = true;
+            }
+
+            // Show "no results" message if no matches found
+            if (found) {
+                noResults.style.display = 'none';
+            } else {
+                noResults.style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="searchInput" onkeyup="searchDoctor()" placeholder="লোকেশন অনুসারে সার্চ করুন...">
+        <p id="noResults" class="no-results">কোনো ফলাফল খুঁজে পাওয়া যায়নি</p>
+        
+        <!-- প্রথম ব্লক -->
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>টিকিটের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+            <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
+        </div>
+        <!-- দ্বিতীয় ব্লক -->
+<div class="info-box" data-location="মৌলভীবাজার">
+    <p>edited</p>
+    <p>edited</p>
+    <p>edited</p>
+    <p>টিকিটের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+    <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
+</div>
+
+<!-- তৃতীয় ব্লক -->
+<div class="info-box" data-location="মৌলভীবাজার">
+    <p>edited</p>
+    <p>edited</p>
+    <p>edited</p>
+    <p>টিকিটের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+    <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
+</div>
+
+<!-- চতুর্থ ব্লক -->
+<div class="info-box" data-location="মৌলভীবাজার">
+    <p>edited</p>
+    <p>edited</p>
+    <p>edited</p>
+    <p>টিকিটের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+    <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
+</div>
+
+<!-- পঞ্চম ব্লক -->
+<div class="info-box" data-location="মৌলভীবাজার">
+    <p>edited</p>
+    <p>edited</p>
+    <p>edited</p>
+    <p>টিকিটের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+    <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
+</div>
+
+<!-- ষষ্ঠ ব্লক -->
+<div class="info-box" data-location="মৌলভীবাজার">
+    <p>edited</p>
+    <p>edited</p>
+    <p>edited</p>
+    <p>টিকিটের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+    <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
+</div>
+
+<!-- সপ্তম ব্লক -->
+<div class="info-box" data-location="মৌলভীবাজার">
+    <p>edited</p>
+    <p>edited</p>
+    <p>edited</p>
+    <p>টিকিটের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+    <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
+</div>
+
+<!-- অষ্টম ব্লক -->
+<div class="info-box" data-location="মৌলভীবাজার">
+    <p>edited</p>
+    <p>edited</p>
+    <p>edited</p>
+    <p>টিকিটের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+    <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
+</div>
+
+<!-- নবম ব্লক -->
+<div class="info-box" data-location="মৌলভীবাজার">
+    <p>edited</p>
+    <p>edited</p>
+    <p>edited</p>
+    <p>টিকিটের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+    <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
+</div>
+
+<!-- দশম ব্লক -->
+<div class="info-box" data-location="মৌলভীবাজার">
+    <p>edited</p>
+    <p>edited</p>
+    <p>edited</p>
+    <p>টিকিটের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+    <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
+</div>
+
+	 </body>
+	 </html>
+	
