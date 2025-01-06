@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>হাসপাতাল</title>
     <style>
         body {
@@ -15,6 +15,7 @@
             -moz-user-select: none; /* Prevent selecting text in Firefox */
             -ms-user-select: none; /* Prevent selecting text in IE */
             user-select: none; /* Prevent selecting text in standard browsers */
+            overflow: auto; /* Enable scrolling */
         }
 
         .container {
@@ -23,62 +24,34 @@
             align-items: center;
             gap: 20px; /* ব্লকের মাঝে ফাঁকা */
             padding: 20px;
+            position: relative; /* For positioning child elements */
+        }
+
+        #searchInput {
+            width: 80%; /* Increase the width of the input box */
+            max-width: 500px; /* Maximum width */
+            padding: 10px; /* Add padding for better appearance */
+            font-size: 18px; /* Increase font size */
+            border: 2px solid #007bff; /* Add border */
+            border-radius: 5px; /* Add border radius */
         }
 
         .info-box {
             padding: 20px;
-            color: black; /* ব্ল্যাক টেক্সট */
+            background: rgba(255, 255, 255, 0.9); /* Background color with opacity */
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow */
             width: 90%; /* প্রস্থ নির্ধারণ */
             max-width: 500px; /* সর্বোচ্চ প্রস্থ নির্ধারণ */
-            position: relative;
-            overflow: hidden; /* পসুডো-এলিমেন্ট সীমাবদ্ধ করতে */
-            background-color: rgba(255, 255, 255, 0.8); /* ব্যাকগ্রাউন্ড সাদা ও অপাসিটি 0.8 */
+            position: relative; /* For stacking context */
+            background-image: url('hospitalcss.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay; /* Blend mode for opacity */
         }
 
-        .info-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover; /* পুরো ব্যাকগ্রাউন্ড ছবি কভার করা */
-            background-position: center; /* কেন্দ্রে রাখা */
-            opacity: 4; /* ছবির অপাসিটি */
-            z-index: -1; /* ছবিকে পেছনে রাখা */
-        }
-
-        .info-box-1::before {
-            background-image: url('container1.jpg'); /* প্রথম ব্যাকগ্রাউন্ড ছবি */
-        }
-        .info-box-2::before {
-            background-image: url('container2.jpg'); /* দ্বিতীয় ব্যাকগ্রাউন্ড ছবি */
-        }
-        .info-box-3::before {
-            background-image: url('container3.jpg'); /* তৃতীয় ব্যাকগ্রাউন্ড ছবি */
-        }
-        .info-box-4::before {
-            background-image: url('container4.jpg'); /* চতুর্থ ব্যাকগ্রাউন্ড ছবি */
-        }
-        .info-box-5::before {
-            background-image: url('container5.jpg'); /* পঞ্চম ব্যাকগ্রাউন্ড ছবি */
-        }
-        .info-box-6::before {
-            background-image: url('container6.jpg'); /* ষষ্ঠ ব্যাকগ্রাউন্ড ছবি */
-        }
-        .info-box-7::before {
-            background-image: url('container7.jpg'); /* সপ্তম ব্যাকগ্রাউন্ড ছবি */
-        }
-        .info-box-8::before {
-            background-image: url('container8.jpg'); /* অষ্টম ব্যাকগ্রাউন্ড ছবি */
-        }
-        .info-box-9::before {
-            background-image: url('container9.jpg'); /* নবম ব্যাকগ্রাউন্ড ছবি */
-        }
-        .info-box-10::before {
-            background-image: url('container10.jpg'); /* দশম ব্যাকগ্রাউন্ড ছবি */
+        .info-box p {
+            font-weight: bold; /* Make text bold */
         }
 
         .call-number {
@@ -87,7 +60,15 @@
             cursor: pointer; /* ক্লিকযোগ্য */
         }
 
-        .back-btn, .map-btn {
+        .location-link {
+            color: #007bff; /* নীল টেক্সট */
+            text-decoration: underline; /* টেক্সটের নিচে রেখা */
+            cursor: pointer; /* ক্লিকযোগ্য */
+            display: block;
+            margin-top: 10px;
+        }
+
+        .back-btn {
             margin-top: 20px;
             background-color: #007bff; /* নীল ব্যাকগ্রাউন্ড */
             color: white; /* সাদা টেক্সট */
@@ -98,105 +79,103 @@
             font-size: 16px;
         }
 
-        .back-btn:hover, .map-btn:hover {
+        .back-btn:hover {
             background-color: #0056b3; /* হোভার অবস্থানে গাঢ় নীল */
         }
+
+        .no-results {
+            display: none; /* প্রাথমিকভাবে লুকানো */
+            font-size: 18px;
+            color: red;
+            font-weight: bold;
+        }
     </style>
+    <script>
+        function searchDoctor() {
+            var input = document.getElementById('searchInput').value.toLowerCase();
+            var infoBoxes = document.getElementsByClassName('info-box');
+            var noResults = document.getElementById('noResults');
+            var found = false;
+
+            for (var i = 0; i < infoBoxes.length; i++) {
+                var location = infoBoxes[i].dataset.location.toLowerCase();
+                if (location.includes(input)) {
+                    infoBoxes[i].style.display = 'block';
+                    found = true;
+                } else {
+                    infoBoxes[i].style.display = 'none';
+                }
+            }
+
+            // If search input is empty, show all divs
+            if (!input) {
+                for (var i = 0; i < infoBoxes.length; i++) {
+                    infoBoxes[i].style.display = 'block';
+                }
+                found = true;
+            }
+
+            // Show "no results" message if no matches found
+            if (found) {
+                noResults.style.display = 'none';
+            } else {
+                noResults.style.display = 'block';
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
+        <input type="text" id="searchInput" onkeyup="searchDoctor()" placeholder="লোকেশন অনুসারে সার্চ করুন...">
+        <p id="noResults" class="no-results">কোনো ফলাফল খুঁজে পাওয়া যায়নি</p>
+        
         <!-- প্রথম ব্লক -->
-        <div class="info-box info-box-1">
-            <p>হাসপাতাল নাম </p>
-            <p>ঠিকানা</p>
-            <p>বিস্তারিত </p>
-            <p>যোগাযোগের জন্য: <a href="tel:01716127800" class="call-number">01716127800</a></p>
-            <!-- গুগল ম্যাপ বাটন -->
-            <button class="map-btn" onclick="openMap('24.30290798431167,91.73325581482168')">গুগল ম্যাপে দেখুন</button>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+            <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
         </div>
         <!-- দ্বিতীয় ব্লক -->
-        <div class="info-box info-box-2">
-            <p>হাসপাতাল নাম </p>
-            <p>ঠিকানা</p>
-            <p>বিস্তারিত </p>
-            <p>যোগাযোগের জন্য: <a href="tel:01716127801" class="call-number">01716127801</a></p>
-            <!-- গুগল ম্যাপ বাটন -->
-            <button class="map-btn" onclick="openMap('24.30290798431168,91.73325581482169')">গুগল ম্যাপে দেখুন</button>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+            <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
         </div>
         <!-- তৃতীয় ব্লক -->
-        <div class="info-box info-box-3">
-            <p>হাসপাতাল নাম </p>
-            <p>ঠিকানা</p>
-            <p>বিস্তারিত </p>
-            <p>যোগাযোগের জন্য: <a href="tel:01716127802" class="call-number">01716127802</a></p>
-            <!-- গুগল ম্যাপ বাটন -->
-            <button class="map-btn" onclick="openMap('24.30290798431169,91.73325581482170')">গুগল ম্যাপে দেখুন</button>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+            <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
         </div>
         <!-- চতুর্থ ব্লক -->
-        <div class="info-box info-box-4">
-            <p>হাসপাতাল নাম </p>
-            <p>ঠিকানা</p>
-            <p>বিস্তারিত </p>
-            <p>যোগাযোগের জন্য: <a href="tel:01716127803" class="call-number">01716127803</a></p>
-            <!-- গুগল ম্যাপ বাটন -->
-            <button class="map-btn" onclick="openMap('24.30290798431170,91.73325581482171')">গুগল ম্যাপে দেখুন</button>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+            <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
         </div>
         <!-- পঞ্চম ব্লক -->
-        <div class="info-box info-box-5">
-            <p>হাসপাতাল নাম </p>
-            <p>ঠিকানা</p>
-            <p>বিস্তারিত </p>
-            <p>যোগাযোগের জন্য: <a href="tel:01716127804" class="call-number">01716127804</a></p>
-            <!-- গুগল ম্যাপ বাটন -->
-            <button class="map-btn" onclick="openMap('24.30290798431171,91.73325581482172')">গুগল ম্যাপে দেখুন</button>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+            <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
         </div>
         <!-- ষষ্ঠ ব্লক -->
-        <div class="info-box info-box-6">
-            <p>হাসপাতাল নাম </p>
-            <p>ঠিকানা</p>
-            <p>বিস্তারিত </p>
-            <p>যোগাযোগের জন্য: <a href="tel:01716127805" class="call-number">01716127805</a></p>
-            <!-- গুগল ম্যাপ বাটন -->
-            <button class="map-btn" onclick="openMap('24.30290798431172,91.73325581482173')">গুগল ম্যাপে দেখুন</button>
+        <div class="info-box" data-location="মৌলভীবাজার">
+            <p>edited</p>
+            <p>edited</p>
+            <p>edited</p>
+            <p>সিরিয়ালের জন্য <a href="tel:01718005011" class="call-number">01718005011</a>, <a href="tel:01718002112" class="call-number">01718002112</a></p>
+            <a href="https://www.google.com/maps?q=24.3055,91.7314" class="location-link" target="_blank">গুগল ম্যাপে দেখুন</a>
         </div>
         <!-- সপ্তম ব্লক -->
-        <div class="info-box info-box-7">
-            <p>হাসপাতাল নাম </p>
-            <p>ঠিকানা</p>
-            <p>বিস্তারিত </p>
-            <p>যোগাযোগের জন্য: <a href="tel:01716127806" class="call-number">01716127806</a></p>
-            <!-- গুগল ম্যাপ বাটন -->
-            <button class="map-btn" onclick="openMap('24.30290798431173,91.73325581482174')">গুগল ম্যাপে দেখুন</button>
-        </div>
-        <!-- অষ্টম ব্লক -->
-        <div class="info-box info-box-7">
-            <p>হাসপাতাল নাম </p>
-            <p>ঠিকানা</p>
-            <p>বিস্তারিত </p>
-            <p>যোগাযোগের জন্য: <a href="tel:01716127806" class="call-number">01716127806</a></p>
-            <!-- গুগল ম্যাপ বাটন -->
-            <button class="map-btn" onclick="openMap('24.30290798431173,91.73325581482174')">গুগল ম্যাপে দেখুন</button>
-        </div>
-		<div class="info-box info-box-7">
-            <p>হাসপাতাল নাম </p>
-            <p>ঠিকানা</p>
-            <p>বিস্তারিত </p>
-            <p>যোগাযোগের জন্য: <a href="tel:01716127806" class="call-number">01716127806</a></p>
-            <!-- গুগল ম্যাপ বাটন -->
-            <button class="map-btn" onclick="openMap('24.30290798431173,91.73325581482174')">গুগল ম্যাপে দেখুন</button>
-        </div>
-		<div class="info-box info-box-7">
-            <p>হাসপাতাল নাম </p>
-            <p>ঠিকানা</p>
-            <p>বিস্তারিত </p>
-            <p>যোগাযোগের জন্য: <a href="tel:01716127806" class="call-number">01716127806</a></p>
-            <!-- গুগল ম্যাপ বাটন -->
-            <button class="map-btn" onclick="openMap('24.30290798431173,91.73325581482174')">গুগল ম্যাপে দেখুন</button>
-        </div>
-    <script>
-        function openMap(coords) {
-            window.open(`https://www.google.com/maps/dir/?api=1&destination=${coords}`, "_blank");
-        }
-    </script>
-</body>
-</html>
+        <div class="info[_{{{CITATION{{{_1{](https://github.com/jifrivly/Indeed_head_hunters/tree/a713bec97e4cb1344b1ee241ddfbe9c82e290851/application%2Fviews%2Fheader.php)
