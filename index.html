@@ -106,16 +106,19 @@
     </div>
 
     <script>
+        // ব্যবহারকারীদের তালিকা
+        const users = {
+            "admin": "admin",
+            "user1": "user1",
+            "user2": "user2"
+        };
+
         function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // সঠিক ইউজারনেম এবং পাসওয়ার্ড
-            const correctUsername = "admin";
-            const correctPassword = "admin";
-
             // যাচাইকরণ
-            if(username === correctUsername && password === correctPassword) {
+            if(users[username] && users[username] === password) {
                 // লগইন সফল হলে হোম পেইজে রিডিরেক্ট করুন
                 window.location.href = 'home.html';
             } else {
