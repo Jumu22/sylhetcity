@@ -11,7 +11,11 @@
             padding: 0;
             background-color: #f4f4f4;
             text-align: center;
-            overflow: hidden; /* স্ক্রলিং বন্ধ করতে */
+            overflow-y: scroll; /* Vertical scroll সক্রিয় */
+            overflow-x: hidden; /* Horizontal scroll নিষিদ্ধ */
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, supported by Chrome, Firefox, Opera */
         }
         .header {
             background-color: #4CAF50;
@@ -105,26 +109,27 @@
                 <img src="fire.png" alt="Fire Service">
                 <p>ফায়ার সার্ভিস</p>
             </div>
-			<div class="icon-card">
-                <img src="police.png" alt="পুলিশ">
+            <div class="icon-card">
+                <img src="police.png" alt="Police">
                 <p>পুলিশ</p>
-				</div>	
-			<div class="icon-card">
-                <img src="electric.png" alt="পল্লি বিদ্যুৎ">
-                <p>পল্লি বিদ্যুৎ</p>	
             </div>
-			<div class="icon-card" onclick="window.location.href='index.html'">
+            <div class="icon-card">
+                <img src="electric.png" alt="Electricity">
+                <p>পল্লি বিদ্যুৎ</p>
+            </div>
+            <div class="icon-card" onclick="window.location.href='index.html'">
                 <img src="rentcar.png" alt="গাড়ী ভাড়া">
-                <p>গাড়ী ভাড়া</p>	
+                <p>গাড়ী ভাড়া</p>
             </div>
-			<div class="icon-card" onclick="window.location.href='index.html'">
+            <div class="icon-card" onclick="window.location.href='index.html'">
                 <img src="teacher.png" alt="শিক্ষক">
-                <p>শিক্ষক</p>	
+                <p>শিক্ষক</p>
             </div>
-			<div class="icon-card" onclick="window.location.href='index.html'">
-                <img src="ambulence.png" alt="এম্বুলেন্স">
-                <p>এম্বুলেন্স</p>	
+            <div class="icon-card" onclick="window.location.href='index.html'">
+                <img src="ambulance.png" alt="Ambulance">
+                <p>এম্বুলেন্স</p>
             </div>
+        </div>
     </div>
     <div class="nav-bar">
         <a href="#">Home</a>
@@ -132,9 +137,17 @@
         <a href="#">Notification</a>
         <a href="#">Profile</a>
     </div>
-
     <script>
-        // JavaScript for dynamic functionality if needed
+        // Prevent zooming
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('gesturechange', function(e) {
+            e.preventDefault();
+        });
+        document.addEventListener('gestureend', function(e) {
+            e.preventDefault();
+        });
     </script>
 </body>
 </html>
