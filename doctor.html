@@ -15,6 +15,10 @@
             margin: 0;
             overflow: auto; /* স্ক্রলিং সক্ষম করতে */
             height: 100vh; /* সম্পূর্ণ ভিউপোর্ট উচ্চতা */
+            -webkit-user-select: none; /* Prevent selecting text in Safari */
+            -moz-user-select: none; /* Prevent selecting text in Firefox */
+            -ms-user-select: none; /* Prevent selecting text in IE */
+            user-select: none; /* Prevent selecting text in standard browsers */
         }
         .container {
             display: grid;
@@ -52,6 +56,10 @@
             width: 100%;
             text-align: center;
             font-size: 18px; /* শিরোনামের আকার ছোট করা হয়েছে */
+            -webkit-user-select: none; /* Prevent selecting text in Safari */
+            -moz-user-select: none; /* Prevent selecting text in Firefox */
+            -ms-user-select: none; /* Prevent selecting text in IE */
+            user-select: none; /* Prevent selecting text in standard browsers */
         }
     </style>
 </head>
@@ -123,9 +131,7 @@
             <p>শিশু বিশেষজ্ঞ</p>    
         </div>
         <div class="button" onclick="window.location.href='dentis.html'">
-
             <img src="homeo.png" alt=" হোমিওপ্যাথি ">
-
             <p>হোমিওপ্যাতিক </p>
         </div>
     </div>
